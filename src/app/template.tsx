@@ -1,8 +1,10 @@
 const Template = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <h1>Hello World</h1>
+      {/* <h1>Hello World</h1> */}
       {children}
     </div>
   );
 };
+
+export default Template;
