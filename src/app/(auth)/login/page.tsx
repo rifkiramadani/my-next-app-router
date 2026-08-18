@@ -1,6 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { SubmitEvent } from "react";
 
 const Login = () => {
+  const handleLogin = (event: SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    fetch("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({
+        email: event.currentTarget.email.value,
+        password: event.currentTarget.password.value,
+      }),
+    });
+  };
+
   return (
     <main className="min-h-screen flex justify-center items-center">
       <div className=" w-100 bg-gray-800 rounded-md p-10">
@@ -16,7 +30,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={(event) => handleLogin(event)} className="space-y-6">
             <div>
               <label
                 htmlFor="email"
