@@ -1,52 +1,35 @@
+import getData from "@/services/products";
+import Link from "next/link";
+
 type DetailProductPageProps = {
   params: Promise<{
     slug?: string[];
   }>;
 };
 
-const getData = async () => {
-  // const res = await fetch("https://fakestoreapi.com/products", {
-  //   cache: "no-store",
-  // });
-  const res = await fetch("http://localhost:3000/api/product", {
-    cache: "no-store",
-    next: {
-      tags: ["products"],
-      // revalidate: 30,
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Failed to Fetch Data");
-  }
-  return res.json();
-};
-
 const ProductPage = async ({ params }: DetailProductPageProps) => {
   const { slug } = await params;
-  const products = await getData();
+  const products = await getData(`http://localhost:3000/api/product`);
   // console.log(products);
   return (
     <div className="grid grid-cols-5 mt-4 place-items-center gap-3 p-4">
       {/* {slug ? "Detail Product Page" : "Product Page"} */}
       {products.data.length > 0 &&
         products.data.map((product: any) => (
-          <div
+          <Link
+            href={`/product/detail/${product.id}`}
             className="w-full max-w-sm bg-neutral-primary-soft p-6 border border-default rounded-base shadow-xs dark:bg-gray-800 dark:border-gray-700 my-5 rounded-md"
             key={product.id}
           >
-            <a href="#">
-              <img
-                className="rounded-base mb-6 object-cover h-96 w-full"
-                src={product.image}
-                alt={product.name}
-              />
-            </a>
+            <img
+              className="rounded-base mb-6 object-cover h-96 w-full"
+              src={product.image}
+              alt={product.name}
+            />
             <div>
-              <a href="#">
-                <h5 className="text-xl text-heading font-semibold tracking-tight dark:text-white truncate">
-                  {product.title}
-                </h5>
-              </a>
+              <h5 className="text-xl text-heading font-semibold tracking-tight dark:text-white truncate">
+                {product.title}
+              </h5>
               <div className="flex items-center justify-between mt-6">
                 <span className="text-3xl font-extrabold text-heading dark:text-white">
                   Rp.{product.price}
@@ -76,7 +59,7 @@ const ProductPage = async ({ params }: DetailProductPageProps) => {
                 </button>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       {slug && (
         <>

@@ -17,8 +17,10 @@ const disableNavbar = ["/login", "/register"];
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   const pathname = usePathname();
   return (
@@ -26,6 +28,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {!disableNavbar.includes(pathname) && <Navbar />}
         {children}
+        {modal}
       </body>
     </html>
   );
