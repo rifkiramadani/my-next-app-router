@@ -37,7 +37,7 @@ const Navbar = () => {
       </div>
       <div>
         <button
-          className="bg-white rounded-md px-3 text-sm h-7 cursor-pointer"
+          className="bg-white rounded-md px-3 text-sm h-7 cursor-pointer text-black"
           onClick={() => router.push("/login")}
         >
           Login

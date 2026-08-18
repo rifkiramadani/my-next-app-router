@@ -26,9 +26,9 @@ const AdminProductPage = () => {
       {status}
       <button
         onClick={() => revalidate()}
-        className="bg-black text-white rounded-md cursor-pointer p-4 m-5"
+        className="bg-gray-300 text-black rounded-md cursor-pointer p-4 w-full h-96 flex justify-center items-center"
       >
-        Revalidate
+        <div className="bg-black rounded-md p-4 text-white">Revalidate</div>
       </button>
     </div>
   );
